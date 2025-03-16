@@ -2,10 +2,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import s from "./SearchBar.module.css"
 
-const SearchBar= ({ onSubmit }) =>{
-    const [value, setvalue]=useState("");
+interface SearchBarProps {
+    onSubmit: (query: string) => void;
+  };
 
-    const handleSubmit = (e) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSubmit }) =>{
+    const [value, setvalue]=useState<string>("");
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); 
     
         if (value.trim() === "") {
@@ -27,7 +31,7 @@ const SearchBar= ({ onSubmit }) =>{
            <form className={s.form} onSubmit={handleSubmit}>
              <input className={s.searchInput} type="text" autoComplete="off" autoFocus placeholder="Search images and photos" 
              value={value}
-             onChange={(e) => setvalue(e.target.value)}/>
+             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setvalue(e.target.value)}/>
             <button className={s.button} type="submit">Search</button>
             </form>
         </header>

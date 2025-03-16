@@ -1,8 +1,15 @@
+import React from "react";
 import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, onClose, image }) => {
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: ()=> void;
+  image: string;
+}
+
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, image }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -25,7 +32,7 @@ const ImageModal = ({ isOpen, onClose, image }) => {
     >
       <div>
         <img
-          onClick={onClose}
+          onClick={onClose as React.MouseEventHandler<HTMLImageElement>}
           src={image}
           style={{ maxWidth: "90vw", maxHeight: "90vh" }}
         />
